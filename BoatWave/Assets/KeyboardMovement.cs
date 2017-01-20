@@ -7,15 +7,16 @@ public class KeyboardMovement : MonoBehaviour
 
     Vector3 speed = new Vector3();
 
-    const float MAX_SPEED = 4;
-    const float ACCELERATION = 0.1f;
+    public float maxSpeed = 3;
+    public float acceleration = 0.1f;
+    public bool fixedSpeed;
 
     bool breakButton = false;
 
     void Update()
     {
-        var inputVec = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        inputVec = inputVec.normalized;
+        var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        direction = direction.normalized;
 
         if (Input.GetKeyDown("space"))
         {
@@ -27,14 +28,19 @@ public class KeyboardMovement : MonoBehaviour
             breakButton = false;
         }
 
-        if(breakButton)
+        if(!this.fixedSpeed) {
+            //stop our current acceleration
+            if (breakButton)
+            {
+                direction = -speed.normalized;
+            }
+            this.AddForce(direction * acceleration);
+        } else
         {
-            inputVec = -speed.normalized;
+            this.speed = direction * maxSpeed;
         }
 
-        this.AddForce(inputVec * ACCELERATION);
-
-        transform.position += speed * Time.deltaTime;
+        this.move();
     }
 
     void AddForce(Vector3 acc)
@@ -43,18 +49,23 @@ public class KeyboardMovement : MonoBehaviour
         var tempSpeed = speed + acc;
 
         //make sure we don't fly too fast
-        if(tempSpeed.magnitude > MAX_SPEED)
+        if(tempSpeed.magnitude > maxSpeed)
         {
-            setLength(tempSpeed, MAX_SPEED);
+            setLength(tempSpeed, maxSpeed);
         }
 
         speed = tempSpeed;
     }
 
-    static void setLength(Vector3 vec, double length)
+    void move()
+    {
+        transform.position += speed * Time.deltaTime;
+    }
+
+    static void setLength(Vector3 vec, float length)
     {
         Vector3 tempVec = vec.normalized;
-        tempVec.Set(tempVec.x * MAX_SPEED, tempVec.y * MAX_SPEED, tempVec.z * MAX_SPEED);
+        tempVec.Set(tempVec.x * length, tempVec.y * length, tempVec.z * length);
         vec.Set(tempVec.x, tempVec.y, tempVec.z);
     }
 

@@ -17,12 +17,12 @@ public class KeyboardMovement : MonoBehaviour
 
     bool breakButton = false;
 
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        print("collision: " + collision);
+        //print("collision: " + collision);
         this.speed.Set(0, 0, 0);
     }
-
+    
     void Update()
     {
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
@@ -49,7 +49,8 @@ public class KeyboardMovement : MonoBehaviour
                 tempAccel = deAcceleration;
             }
             this.AddForce(tempDirection * tempAccel);
-        } else
+        }
+        else
         {
             this.speed = direction * maxSpeed;
         }
@@ -67,6 +68,8 @@ public class KeyboardMovement : MonoBehaviour
         }
 
         this.move();
+
+      
     }
 
     void AddForce(Vector3 acc)

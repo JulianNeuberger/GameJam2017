@@ -10,9 +10,18 @@ public class KeyboardMovement : MonoBehaviour
     public float maxSpeed = 3;
     public float acceleration = 0.1f;
     public float deAcceleration = 0.1f;
+    public float stopSpeed = 0.001f;
     public bool fixedSpeed;
 
+    public bool debug;
+
     bool breakButton = false;
+
+    void OnCollisionEnter(Collision collision)
+    {
+        print("collision: " + collision);
+        this.speed.Set(0, 0, 0);
+    }
 
     void Update()
     {
@@ -31,16 +40,30 @@ public class KeyboardMovement : MonoBehaviour
 
         if(!this.fixedSpeed) {
             var tempDirection = direction;
+            var tempAccel = acceleration;
             //stop our current acceleration
             if (breakButton || direction.normalized.magnitude == 0)
             {
                 //start decaying
                 tempDirection = -speed.normalized;
+                tempAccel = deAcceleration;
             }
-            this.AddForce(tempDirection * acceleration);
+            this.AddForce(tempDirection * tempAccel);
         } else
         {
             this.speed = direction * maxSpeed;
+        }
+
+        // just so we don't end up with weird behaviour around the zero mark
+        if(this.speed.magnitude < this.stopSpeed)
+        {
+            this.speed.Set(0, 0, 0);
+        }
+
+        if (debug)
+        {
+            print("transform: " + this.transform.position);
+            print("speed: " + this.speed);
         }
 
         this.move();
@@ -62,7 +85,7 @@ public class KeyboardMovement : MonoBehaviour
 
     void move()
     {
-        transform.position += speed * Time.deltaTime;
+        this.transform.position += speed * Time.deltaTime;
     }
 
     static void setLength(Vector3 vec, float length)

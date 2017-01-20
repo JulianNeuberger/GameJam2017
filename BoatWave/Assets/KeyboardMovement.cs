@@ -9,6 +9,7 @@ public class KeyboardMovement : MonoBehaviour
 
     public float maxSpeed = 3;
     public float acceleration = 0.1f;
+    public float deAcceleration = 0.1f;
     public bool fixedSpeed;
 
     bool breakButton = false;
@@ -29,12 +30,14 @@ public class KeyboardMovement : MonoBehaviour
         }
 
         if(!this.fixedSpeed) {
+            var tempDirection = direction;
             //stop our current acceleration
-            if (breakButton)
+            if (breakButton || direction.normalized.magnitude == 0)
             {
-                direction = -speed.normalized;
+                //start decaying
+                tempDirection = -speed.normalized;
             }
-            this.AddForce(direction * acceleration);
+            this.AddForce(tempDirection * acceleration);
         } else
         {
             this.speed = direction * maxSpeed;

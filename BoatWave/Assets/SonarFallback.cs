@@ -19,7 +19,9 @@ public class SonarFallback : MonoBehaviour
     protected Light Sonar;
     protected bool Pinging;
     protected float SonarIntensity;
-    float IntensityChange;
+    protected GameObject SonarEffect;
+    protected Color SonarColor;
+    protected float IntensityChange;
 
     // Use this for initialization
     void Start ()
@@ -27,6 +29,8 @@ public class SonarFallback : MonoBehaviour
         Sonar = GetComponent<Light>();
         SonarIntensity = Sonar.intensity;
         IntensityChange = SonarIntensity / (SonarMaxRange / SonarSpeed);
+        SonarEffect = this.gameObject.transform.Find("SonarEffect").gameObject;
+        SonarColor = SonarEffect.GetComponent<SpriteRenderer>().color;
     }
 	
 	// Update is called once per frame
@@ -43,11 +47,21 @@ public class SonarFallback : MonoBehaviour
                 Pinging = false;
                 Sonar.range = 0;
                 Sonar.intensity = SonarIntensity;
+                SonarEffect.transform.localScale = new Vector3(0, 0, 0);
             }
             else
             {
+                // sonar "point light"
                 Sonar.range += Time.deltaTime * SonarSpeed;
-                Sonar.intensity -= IntensityChange * Time.deltaTime;
+                Sonar.intensity -= Time.deltaTime * IntensityChange;
+
+                // ### sonar effect
+                // sonar effect gets larger
+                SonarEffect.transform.localScale = new Vector3(Sonar.range, Sonar.range, 1);
+                // sonar effects gets more transparent
+                float SonarColorAlpha = (1 - Sonar.range / SonarMaxRange) * .5f;
+                SonarEffect.GetComponent<SpriteRenderer>().material.color = 
+                    new Color(SonarColor.r, SonarColor.g, SonarColor.b, SonarColorAlpha);
             }
         }
 	}

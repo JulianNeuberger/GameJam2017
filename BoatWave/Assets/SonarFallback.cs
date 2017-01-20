@@ -10,7 +10,8 @@ public class SonarFallback : MonoBehaviour
 
     public float SonarMaxRange      = 50;
     // in units/second
-    public float SonarSpeed         = 10; 
+    public float SonarSpeed         = 10;
+    public float InitialRange       = 0;
 
     // ##################################################
     // vars hidden from inspector                       #
@@ -20,17 +21,17 @@ public class SonarFallback : MonoBehaviour
     protected bool Pinging;
     protected float SonarIntensity;
     protected GameObject SonarEffect;
-    protected Color SonarColor;
     protected float IntensityChange;
+    public Color SonarColor;
 
     // Use this for initialization
     void Start ()
     {
-        Sonar = GetComponent<Light>();
+        Sonar = this.gameObject.transform.Find("Sonar").GetComponent<Light>();
         SonarIntensity = Sonar.intensity;
         IntensityChange = SonarIntensity / (SonarMaxRange / SonarSpeed);
-        SonarEffect = this.gameObject.transform.Find("SonarEffect").gameObject;
-        SonarColor = SonarEffect.GetComponent<SpriteRenderer>().color;
+        SonarEffect = Sonar.transform.Find("SonarEffect").gameObject;
+        SonarColor = SonarEffect.GetComponent<SpriteRenderer>().material.color;
     }
 	
 	// Update is called once per frame

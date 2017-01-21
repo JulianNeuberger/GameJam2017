@@ -185,7 +185,8 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1694184983764554, guid: 18f31a31c8b924641b71e6f3bad4b1c8,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1abe405bba600b84787331810cc32cca, type: 2}
   m_IsPrefabParent: 0
@@ -1875,6 +1876,11 @@ Prefab:
     - target: {fileID: 224015204288059968, guid: 18f31a31c8b924641b71e6f3bad4b1c8,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82914814008537272, guid: 18f31a31c8b924641b71e6f3bad4b1c8,
+        type: 2}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

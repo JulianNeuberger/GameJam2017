@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class HealtSystemShip : HealthSystem {
-    public Slider healthSlider;                                 // Reference to the UI's health bar.
+    Slider healthSlider;                                 // Reference to the UI's health bar.
     Animator anim;                                              // Reference to the Animator component.
-    public AudioSource playerAudio;                                    // Reference to the AudioSource component.
+    AudioSource playerAudio;                                    // Reference to the AudioSource component.
     
     void Start () {
         anim = GetComponent<Animator>();
-        playerAudio = GetComponent<AudioSource>();
         currentHealth = startingHealth;
+
+        var canvas = transform.FindChild("Canvas").GetComponent<Canvas>();
+        healthSlider = canvas.transform.FindChild("Slider").GetComponent<Slider>();
+
         healthSlider.value = currentHealth;
+
+        GameObject audioObj = (GameObject) Instantiate(Resources.Load("ShipExplosionSound"));
+        playerAudio = audioObj.GetComponent<AudioSource>();
     }	
 	// Update is called once per frame
 	void Update () {

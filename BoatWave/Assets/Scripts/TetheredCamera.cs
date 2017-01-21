@@ -22,7 +22,7 @@ public class TetheredCamera : MonoBehaviour {
         Vector3 playerPos = player.transform.position;
         playerPos.z = -10;
         Vector3 offset = playerPos - this.transform.position;
-        if(offset.magnitude > .1)
+        if(offset.magnitude > .00001)
         {
             this.transform.position += offset / this.tetherStrength;
         } 

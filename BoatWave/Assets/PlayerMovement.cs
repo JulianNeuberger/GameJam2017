@@ -20,16 +20,18 @@ public class PlayerMovement : MonoBehaviour
 
     bool breakButton = false;
     AudioSource bubbleAudio;
-    
+    ParticleSystem bubbleSystem;
+
     void Start()
     {
         bubbleAudio = GetComponent<AudioSource>();
+        bubbleSystem = gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         //print("collision: " + collision);
-        this.speed.Set(0, 0, 0);
+        //this.speed.Set(0, 0, 0);
     }
     
     void Update()
@@ -116,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
             }
             bubbleAudio.pitch = soundSpeed;
         }
+
     }
 
     void move()

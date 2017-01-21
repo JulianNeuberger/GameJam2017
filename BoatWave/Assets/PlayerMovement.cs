@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         direction = direction.normalized;
 
-        if(direction.x != 0)
+        if(direction.x != 0 && !this.dead)
         {
             flipX = direction.x < 0;
             if(flipX)
@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             } else
             {
-                print("accelerating");
+                if (debug)
+                {
+                    print("accelerating");
+                }
                 isAccelerating = true;
             }
 
@@ -99,12 +102,9 @@ public class PlayerMovement : MonoBehaviour
                 print("tempDirection: " + tempDirection);
             }
 
-            if (isAccelerating)
+            if (!this.dead || !isAccelerating)
             {
-                if (!this.dead)
-                {
-                    this.AddForce(tempDirection * tempAccel);
-                }
+                this.AddForce(tempDirection * tempAccel);
             }
         }
 
@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
+        print("die!");
         this.dead = true;
     }
 

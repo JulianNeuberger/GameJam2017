@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     Vector3 speed = new Vector3();
 
     public float maxSpeed = 3;
-    public float acceleration = 0.1f;
-    public float deAcceleration = 0.1f;
+    public float acceleration = 1f;
+    public float deAcceleration = 2f;
     public float stopSpeed = 0.001f;
     public bool fixedSpeed;
 
@@ -39,26 +39,36 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         if(!this.fixedSpeed) {
+            // just so we don't end up with weird behaviour around the zero mark
+            if (this.speed.magnitude < this.stopSpeed)
+            {
+                this.speed.Set(0, 0, 0);
+            }
+
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
-            if (breakButton || direction.normalized.magnitude == 0)
+            if ((breakButton || direction.normalized.magnitude == 0) && this.speed.magnitude > 0)
             {
+                if (debug)
+                {
+                    print("speed: " + this.speed);
+                }
                 //start decaying
                 tempDirection = -speed.normalized;
                 tempAccel = deAcceleration;
             }
+            if (this.debug)
+            {
+                print("tempAccel: " + tempAccel);
+                print("tempDirection: " + tempDirection);
+            }
+
             this.AddForce(tempDirection * tempAccel);
         }
         else
         {
             this.speed = direction * maxSpeed;
-        }
-
-        // just so we don't end up with weird behaviour around the zero mark
-        if(this.speed.magnitude < this.stopSpeed)
-        {
-            this.speed.Set(0, 0, 0);
         }
 
         if (debug)
@@ -75,12 +85,17 @@ public class PlayerBehaviour : MonoBehaviour
     void AddForce(Vector3 acc)
     {
         // add the acceleration value
-        var tempSpeed = speed + acc;
+        var tempSpeed = speed + acc * Time.deltaTime;
 
         //make sure we don't fly too fast
         if(tempSpeed.magnitude > maxSpeed)
         {
-            setLength(tempSpeed, maxSpeed);
+            tempSpeed.Normalize();
+            tempSpeed.Scale(new Vector3(maxSpeed, maxSpeed, maxSpeed));
+            if (debug)
+            {
+                print(tempSpeed);
+            }
         }
 
         speed = tempSpeed;
@@ -89,13 +104,6 @@ public class PlayerBehaviour : MonoBehaviour
     void move()
     {
         this.transform.position += speed * Time.deltaTime;
-    }
-
-    static void setLength(Vector3 vec, float length)
-    {
-        Vector3 tempVec = vec.normalized;
-        tempVec.Set(tempVec.x * length, tempVec.y * length, tempVec.z * length);
-        vec.Set(tempVec.x, tempVec.y, tempVec.z);
     }
 
 }

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelChange : MonoBehaviour {
+public class LevelChange_Stein : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") ;
+        if (collision.tag == "Player")
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadScene("Level 2");
         }
     }
 
-    // Use this for initialization
-   // initialization
+  //Steinanimation wird ausgelöst --> Stein = Leveltür, wenn Triggerzone auf
+  //Player trifft wird Levelwechsel ausgeführt
 	void Start () {
 		
 	}

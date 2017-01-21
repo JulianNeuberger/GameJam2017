@@ -26,6 +26,7 @@ public class ObstacleCollision : MonoBehaviour {
 			GameObject player = coll.gameObject;
             player.GetComponent<HealtSystemShip>().TakeDamage(obstacleDamage);
 		}
+        GetComponent<AudioSource>().Play();
 	}
 
 }

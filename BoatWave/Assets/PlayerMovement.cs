@@ -50,11 +50,15 @@ public class PlayerMovement : MonoBehaviour
 
         if(direction.x != 0)
         {
-            //flipX = direction.x < 0;
-            //if(flipX)
-            //{
-            //    transform.rotation.AngleAxis(180, Vector3.up);
-            //}            
+            flipX = direction.x < 0;
+            if(flipX)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }       
         }
 
         if (Input.GetKeyDown("space"))

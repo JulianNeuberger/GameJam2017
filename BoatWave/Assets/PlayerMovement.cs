@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     bool breakButton = false;
     AudioSource bubbleAudio;
     ParticleSystem bubbleSystem;
-
+    bool flipX = false;
+    
     public Rigidbody2D rb;
 
     void Start()
@@ -40,6 +41,15 @@ public class PlayerMovement : MonoBehaviour
     {
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         direction = direction.normalized;
+
+        if(direction.x != 0)
+        {
+            //flipX = direction.x < 0;
+            //if(flipX)
+            //{
+            //    transform.rotation.AngleAxis(180, Vector3.up);
+            //}            
+        }
 
         if (Input.GetKeyDown("space"))
         {

@@ -13,9 +13,18 @@ public class PlayerMovement : MonoBehaviour
     public float stopSpeed = 0.001f;
     public bool fixedSpeed;
 
+    public float maxSoundSpeed = 3;
+    public float minSoundSpeed = 1;
+
     public bool debug;
 
     bool breakButton = false;
+    AudioSource audio;
+
+    void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -99,6 +108,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         speed = tempSpeed;
+
+        //update the playback speed of the sound
+        {
+            float soundSpeed = 1;
+            if (speed.magnitude > 0) {
+                float additionalSpeed = 2 * speed.magnitude / maxSpeed;
+                soundSpeed = soundSpeed + additionalSpeed;
+            }
+            audio.pitch = soundSpeed;
+        }
     }
 
     void move()

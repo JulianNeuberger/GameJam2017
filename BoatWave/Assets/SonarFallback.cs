@@ -26,11 +26,12 @@ public class SonarFallback : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        Sonar = GetComponent<Light>();
+        Sonar = gameObject.transform.Find("Sonar").GetComponent<Light>();
         SonarIntensity = Sonar.intensity;
         IntensityChange = SonarIntensity / (SonarMaxRange / SonarSpeed);
-        SonarEffect = this.gameObject.transform.Find("SonarEffect").gameObject;
+        SonarEffect = Sonar.gameObject.transform.Find("SonarEffect").gameObject;
         SonarColor = SonarEffect.GetComponent<SpriteRenderer>().color;
+        SonarEffect.transform.localScale = new Vector3(0, 0, 0);
     }
 	
 	// Update is called once per frame
@@ -40,29 +41,40 @@ public class SonarFallback : MonoBehaviour
         {
             Pinging = true;
         }
-        if(Pinging)
+        if (Pinging)
         {
-            if(Sonar.range >= SonarMaxRange)
-            {
-                Pinging = false;
-                Sonar.range = 0;
-                Sonar.intensity = SonarIntensity;
-                SonarEffect.transform.localScale = new Vector3(0, 0, 0);
-            }
-            else
-            {
-                // sonar "point light"
-                Sonar.range += Time.deltaTime * SonarSpeed;
-                Sonar.intensity -= Time.deltaTime * IntensityChange;
-
-                // ### sonar effect
-                // sonar effect gets larger
-                SonarEffect.transform.localScale = new Vector3(Sonar.range, Sonar.range, 1);
-                // sonar effects gets more transparent
-                float SonarColorAlpha = (1 - Sonar.range / SonarMaxRange) * .5f;
-                SonarEffect.GetComponent<SpriteRenderer>().material.color = 
-                    new Color(SonarColor.r, SonarColor.g, SonarColor.b, SonarColorAlpha);
-            }
+            UpdateSonar();
         }
 	}
+
+    protected void UpdateSonar()
+    {
+        if (Sonar.range >= SonarMaxRange)
+        {
+            // reset the sonar light and effect to inital values
+            ResetSonar();
+        }
+        else
+        {
+            // sonar "point light"
+            Sonar.range += Time.deltaTime * SonarSpeed;
+            Sonar.intensity -= Time.deltaTime * IntensityChange;
+
+            // ### sonar effect
+            // sonar effect gets larger
+            SonarEffect.transform.localScale = new Vector3(Sonar.range, Sonar.range, 1);
+            // sonar effects gets more transparent
+            float SonarColorAlpha = (1 - Sonar.range / SonarMaxRange) * .25f;
+            SonarEffect.GetComponent<SpriteRenderer>().material.color =
+                new Color(SonarColor.r, SonarColor.g, SonarColor.b, SonarColorAlpha);
+        }
+    }
+
+    protected void ResetSonar()
+    {
+        Pinging = false;
+        Sonar.range = 0;
+        Sonar.intensity = SonarIntensity;
+        SonarEffect.transform.localScale = new Vector3(0, 0, 0);
+    }
 }

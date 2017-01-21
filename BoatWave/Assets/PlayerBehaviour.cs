@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyboardMovement : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
 
     Vector3 speed = new Vector3();

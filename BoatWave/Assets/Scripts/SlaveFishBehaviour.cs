@@ -6,6 +6,7 @@ public class SlaveFishBehaviour : MonoBehaviour {
 
     protected GameObject leader;
     protected Vector2 offset;
+    protected float directionTime = -1;
     new protected Rigidbody2D rigidbody;
 
     // Use this for initialization
@@ -20,9 +21,18 @@ public class SlaveFishBehaviour : MonoBehaviour {
     {
         Vector2 dir = leader.transform.position - transform.position + new Vector3(offset.x, offset.y, 0);
         rigidbody.velocity = dir;
-	}
 
-    void SetOffset(Vector2 offset)
+        if (directionTime < Time.time)
+        {
+            directionTime = Time.time + Random.Range(.5f, 3f);
+            offset = new Vector2(
+                Random.Range(-1.5f, 1.5f),
+                Random.Range(-1.5f, 1.5f)
+                );
+        }
+    }
+
+    public void SetOffset(Vector2 offset)
     {
         this.offset = offset;
     }

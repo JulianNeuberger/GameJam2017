@@ -24,6 +24,11 @@ public class MasterFishBehaviour : MonoBehaviour {
         {
             Rigidbody2D slaveFish = Instantiate<Rigidbody2D>(slaveFishPrefabs);
             slaveFish.transform.parent = this.transform;
+            SlaveFishBehaviour behaviour = slaveFish.GetComponent<SlaveFishBehaviour>();
+            behaviour.SetOffset(new Vector2(
+                Random.Range(-1.5f, 1.5f),
+                Random.Range(-1.5f, 1.5f)
+                ));
         }
     }
 
@@ -42,7 +47,7 @@ public class MasterFishBehaviour : MonoBehaviour {
         {
             direction = centerDirection;
             rigidbody.velocity = direction;
-            transform.rotation = Quaternion.Euler(direction / direction.magnitude);
+            //transform.rotation = Quaternion.Euler(direction / direction.magnitude);
         }
     }
 }

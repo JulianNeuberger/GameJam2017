@@ -184,7 +184,6 @@ GameObject:
   - component: {fileID: 4869520181335166}
   - component: {fileID: 212868933070137748}
   - component: {fileID: 114776138057336818}
-  - component: {fileID: 114783443823321958}
   - component: {fileID: 82914814008537272}
   - component: {fileID: 50532487968646272}
   - component: {fileID: 60084676683488814}
@@ -613,7 +612,6 @@ MonoBehaviour:
   minSoundSpeed: 1
   audioAccelerateTime: 2
   debug: 0
-  rb: {fileID: 0}
 --- !u!114 &114143973471519184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -710,26 +708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SonarMaxRange: 500
   SonarSpeed: 200
---- !u!114 &114783443823321958
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1694184983764554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3676e29da11c1846ae228cc6c1eb6c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 3
-  acceleration: 2
-  deAcceleration: 1
-  stopSpeed: 0.01
-  maxSoundSpeed: 3
-  minSoundSpeed: 1
-  audioAccelerateTime: 2
-  debug: 0
-  rb: {fileID: 0}
 --- !u!114 &114891678676579826
 MonoBehaviour:
   m_ObjectHideFlags: 1

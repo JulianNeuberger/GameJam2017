@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool dead = false;
     
-    public Rigidbody2D rb;
+    Rigidbody2D rb;
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         direction = direction.normalized;
 
-        if(direction.x != 0 && !this.dead)
+        if(!this.dead && direction.x != 0)
         {
             flipX = direction.x < 0;
             if(flipX)
@@ -168,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         print("die!");
+        bubbleAudio.enabled = false;
         this.dead = true;
     }
 

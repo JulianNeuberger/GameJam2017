@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 1f;
     public float deAcceleration = 2f;
     public float stopSpeed = 0.001f;
-    public bool fixedSpeed;
 
     public float maxSoundSpeed = 3;
     public float minSoundSpeed = 1;
@@ -24,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     AudioSource bubbleAudio;
     ParticleSystem bubbleSystem;
     bool flipX = false;
+
+    bool dead = false;
     
     public Rigidbody2D rb;
 
@@ -71,11 +72,11 @@ public class PlayerMovement : MonoBehaviour
             breakButton = false;
         }
 
-        if(!this.fixedSpeed) {
+        { 
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
-            if ((breakButton || direction.normalized.magnitude == 0))
+            if ((this.dead || breakButton || direction.normalized.magnitude == 0))
             {
                 if (this.rb.velocity.magnitude > 0) {
                     if (debug)
@@ -98,15 +99,13 @@ public class PlayerMovement : MonoBehaviour
                 print("tempDirection: " + tempDirection);
             }
 
-            if (tempDirection.magnitude > 0)
+            if (isAccelerating)
             {
-                this.AddForce(tempDirection * tempAccel);
+                if (!this.dead)
+                {
+                    this.AddForce(tempDirection * tempAccel);
+                }
             }
-        }
-        else
-        {
-            isAccelerating = direction.magnitude > 0;
-            this.rb.velocity = direction * maxSpeed;
         }
 
         if (debug)
@@ -164,6 +163,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         this.rb.velocity = tempSpeed;
+    }
+
+    public void Die()
+    {
+        this.dead = true;
     }
 
 }

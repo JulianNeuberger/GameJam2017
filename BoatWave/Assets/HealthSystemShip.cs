@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class HealtSystemShip : HealthSystem {
+public class HealthSystemShip : HealthSystem {
     Slider healthSlider;                                 // Reference to the UI's health bar.
     Animator anim;                                              // Reference to the Animator component.
     AudioSource playerAudio;                                    // Reference to the AudioSource component.

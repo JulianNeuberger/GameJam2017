@@ -8,16 +8,8 @@ public class PlantWaving : MonoBehaviour {
     public bool randomizeAngle = true;
     public bool usesWorldPosition = true;
     public static int chachedSinValues = 100;
-    
-    protected static float[] sinValues = new float[chachedSinValues];
-    static PlantWaving()
-    {
-        for(int i = 0; i < chachedSinValues; ++i)
-        {
-            float sinVal = i * 2 / chachedSinValues;
-            sinValues[i] = Mathf.Sin(sinVal);
-        }
-    }
+
+    protected Quaternion initialRotation;
 
 	// Use this for initialization
 	void Start ()
@@ -26,6 +18,7 @@ public class PlantWaving : MonoBehaviour {
         {
             maxAngle += Random.value * (maxAngle / 2);
         }
+        initialRotation = transform.rotation;
     }
 	
 	// Update is called once per frame
@@ -40,17 +33,6 @@ public class PlantWaving : MonoBehaviour {
         float sin = Mathf.Sin(sinVal);
         //float sin = GetCachedSin(sinVal);
         float angle = maxAngle * sin;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = initialRotation * Quaternion.Euler(0, 0, angle);
 	}
-
-    static float GetCachedSin(float rad)
-    {
-        if(rad < 0)
-        {
-            rad = -1 * rad + 2;
-        }
-        int index = (int)(rad % 200);
-        //Debug.Log(index);
-        return sinValues[index];
-    }
 }

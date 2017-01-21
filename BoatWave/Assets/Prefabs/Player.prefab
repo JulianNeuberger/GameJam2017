@@ -188,9 +188,9 @@ GameObject:
   - component: {fileID: 82914814008537272}
   - component: {fileID: 50532487968646272}
   - component: {fileID: 60084676683488814}
-  - component: {fileID: 114784922828940470}
+  - component: {fileID: 114027246535832436}
   - component: {fileID: 114009599601958232}
-  - component: {fileID: 114699971506923918}
+  - component: {fileID: 114983398811655386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -321,7 +321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1694184983764554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -22.71, y: 4.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4484931500060736}
@@ -580,6 +580,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114027246535832436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694184983764554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3676e29da11c1846ae228cc6c1eb6c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 3
+  acceleration: 1
+  deAcceleration: 2
+  stopSpeed: 0.001
+  maxSoundSpeed: 3
+  minSoundSpeed: 1
+  audioAccelerateTime: 2
+  debug: 0
+  rb: {fileID: 0}
 --- !u!114 &114176745659436618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -650,22 +670,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114699971506923918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1694184983764554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df10e5f423693694ab71a09cea8b7f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 1
-  currentHealth: 0
-  healthSlider: {fileID: 114891678676579826}
-  playerAudio: {fileID: 82488341074969550, guid: 0cd7b0021ef2d5441b2ed10f0d42ba84,
-    type: 2}
 --- !u!114 &114776138057336818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,26 +698,6 @@ MonoBehaviour:
   acceleration: 2
   deAcceleration: 1
   stopSpeed: 0.01
-  maxSoundSpeed: 3
-  minSoundSpeed: 1
-  audioAccelerateTime: 2
-  debug: 0
-  rb: {fileID: 0}
---- !u!114 &114784922828940470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1694184983764554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3676e29da11c1846ae228cc6c1eb6c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 3
-  acceleration: 1
-  deAcceleration: 2
-  stopSpeed: 0.001
   maxSoundSpeed: 3
   minSoundSpeed: 1
   audioAccelerateTime: 2
@@ -810,6 +794,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114983398811655386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694184983764554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df10e5f423693694ab71a09cea8b7f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 1
+  currentHealth: 0
+  healthSlider: {fileID: 114891678676579826}
+  playerAudio: {fileID: 82488341074969550, guid: 0cd7b0021ef2d5441b2ed10f0d42ba84,
+    type: 2}
 --- !u!120 &120426930350029246
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -967,7 +967,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1694812537
+  randomSeed: -897605653
   InitialModule:
     serializedVersion: 3
     enabled: 1

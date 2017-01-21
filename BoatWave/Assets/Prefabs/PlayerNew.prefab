@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 60084676683488814}
   - component: {fileID: 114027246535832436}
   - component: {fileID: 114009599601958232}
-  - component: {fileID: 114983398811655386}
+  - component: {fileID: 114042673693798394}
   m_Layer: 0
   m_Name: PlayerNew
   m_TagString: Player
@@ -600,6 +600,19 @@ MonoBehaviour:
   audioAccelerateTime: 2
   debug: 0
   rb: {fileID: 0}
+--- !u!114 &114042673693798394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694184983764554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080f55cd8e7ccaf4ca67a2d136ad9dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 1
+  currentHealth: 0
 --- !u!114 &114176745659436618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -794,19 +807,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114983398811655386
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1694184983764554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df10e5f423693694ab71a09cea8b7f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingHealth: 1
-  currentHealth: 0
 --- !u!120 &120426930350029246
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             } else
             {
-                print("accelerating");
+                if (debug)
+                {
+                    print("accelerating");
+                }
                 isAccelerating = true;
             }
 

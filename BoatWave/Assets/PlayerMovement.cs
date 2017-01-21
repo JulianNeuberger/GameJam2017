@@ -19,11 +19,11 @@ public class PlayerMovement : MonoBehaviour
     public bool debug;
 
     bool breakButton = false;
-    AudioSource audio;
-
+    AudioSource bubbleAudio;
+    
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        bubbleAudio = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -87,8 +87,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         this.move();
-
-      
     }
 
     void AddForce(Vector3 acc)
@@ -111,12 +109,12 @@ public class PlayerMovement : MonoBehaviour
 
         //update the playback speed of the sound
         {
-            float soundSpeed = 1;
+            float soundSpeed = this.minSoundSpeed;
             if (speed.magnitude > 0) {
-                float additionalSpeed = 2 * speed.magnitude / maxSpeed;
+                float additionalSpeed = (this.maxSoundSpeed - this.minSoundSpeed) * speed.magnitude / maxSpeed;
                 soundSpeed = soundSpeed + additionalSpeed;
             }
-            audio.pitch = soundSpeed;
+            bubbleAudio.pitch = soundSpeed;
         }
     }
 

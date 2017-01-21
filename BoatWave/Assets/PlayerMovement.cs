@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
                 print("tempDirection: " + tempDirection);
             }
 
-            if (!this.dead)
+            if (!this.dead || !isAccelerating)
             {
                 this.AddForce(tempDirection * tempAccel);
             }

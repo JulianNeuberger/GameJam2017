@@ -1946,21 +1946,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 46
       objectReference: {fileID: 0}
-    - target: {fileID: 224015204288059968, guid: cf9a249229791fb49b35fab68aa7eec3,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 223582636709342994, guid: cf9a249229791fb49b35fab68aa7eec3,
-        type: 2}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 223582636709342994, guid: cf9a249229791fb49b35fab68aa7eec3,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 62964819}
+    - target: {fileID: 224015204288059968, guid: cf9a249229791fb49b35fab68aa7eec3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf9a249229791fb49b35fab68aa7eec3, type: 2}
   m_IsPrefabParent: 0

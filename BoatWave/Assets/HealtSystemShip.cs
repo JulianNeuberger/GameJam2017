@@ -5,19 +5,18 @@ using UnityEngine.UI;
 public class HealtSystemShip : HealthSystem {
     public Slider healthSlider;                                 // Reference to the UI's health bar.
     Animator anim;                                              // Reference to the Animator component.
-    AudioSource playerAudio;                                    // Reference to the AudioSource component.
+    public AudioSource playerAudio;                                    // Reference to the AudioSource component.
     
     void Start () {
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         currentHealth = startingHealth;
-    }
-	
+        healthSlider.value = currentHealth;
+    }	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
     public override void TakeDamage(float amount)
     {
         // Reduce the current health by the damage amount.
@@ -36,13 +35,12 @@ public class HealtSystemShip : HealthSystem {
 
     public override void Death()
     {
-        base.Death();
-        print("hier");
+      
         isDead = true;
 //        playerAudio.clip = deathClip;
         playerAudio.Play();
         //        anim.SetTrigger("Die");
-        //gameObject.GetComponent<PlayerBehaviour>().enabled = false;
-        Destroy(gameObject);
+        gameObject.GetComponent<PlayerMovement>().Die();
+        
     }
 }

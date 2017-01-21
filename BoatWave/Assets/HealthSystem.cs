@@ -7,7 +7,6 @@ public class HealthSystem : MonoBehaviour {
     public int startingHealth = 1;                            // The amount of health the player starts the game with.
     public float currentHealth;                                   // The current health the player has.
     
-    public float collidingDamage;
     //public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
     //public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
        
@@ -16,7 +15,6 @@ public class HealthSystem : MonoBehaviour {
     // Use this for initialization
     void  Start () {
         // Setting up the references.
-        collidingDamage = 0.1f;       
         // Set the initial health of the player.
         currentHealth = startingHealth;
     }
@@ -25,11 +23,6 @@ public class HealthSystem : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        TakeDamage(collidingDamage);
-    }
 
     public virtual void TakeDamage(float amount)
     {

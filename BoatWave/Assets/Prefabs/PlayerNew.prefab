@@ -438,7 +438,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f3b27f4e55f135a47813b0388cc76a47, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -807,9 +807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 1
   currentHealth: 0
-  healthSlider: {fileID: 114891678676579826}
-  playerAudio: {fileID: 82488341074969550, guid: 0cd7b0021ef2d5441b2ed10f0d42ba84,
-    type: 2}
 --- !u!120 &120426930350029246
 LineRenderer:
   m_ObjectHideFlags: 1

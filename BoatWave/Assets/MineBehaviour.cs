@@ -44,5 +44,10 @@ public class MineBehaviour : MonoBehaviour {
             GetComponent<Rigidbody2D>().simulated = false;
             alive = false;
         }
+        AudioSource explosion = GetComponent<AudioSource>();
+        if(explosion != null)
+        {
+            explosion.Play();
+        }
     }
 }

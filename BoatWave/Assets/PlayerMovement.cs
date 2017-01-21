@@ -5,8 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    Vector3 speed = new Vector3();
-
     public float maxSpeed = 3;
     public float acceleration = 1f;
     public float deAcceleration = 2f;
@@ -19,17 +17,23 @@ public class PlayerMovement : MonoBehaviour
     public bool debug;
 
     bool breakButton = false;
-    AudioSource audio;
+    AudioSource bubbleAudio;
+    ParticleSystem bubbleSystem;
+
+    public Rigidbody2D rb;
 
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        bubbleAudio = GetComponent<AudioSource>();
+        bubbleSystem = gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>();
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         //print("collision: " + collision);
-        this.speed.Set(0, 0, 0);
+        //this.speed.Set(0, 0, 0);
     }
     
     void Update()
@@ -49,22 +53,22 @@ public class PlayerMovement : MonoBehaviour
 
         if(!this.fixedSpeed) {
             // just so we don't end up with weird behaviour around the zero mark
-            if (this.speed.magnitude < this.stopSpeed)
+            if (this.rb.velocity.magnitude < this.stopSpeed)
             {
-                this.speed.Set(0, 0, 0);
+                this.rb.velocity.Set(0, 0);
             }
 
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
-            if ((breakButton || direction.normalized.magnitude == 0) && this.speed.magnitude > 0)
+            if ((breakButton || direction.normalized.magnitude == 0) && this.rb.velocity.magnitude > 0)
             {
                 if (debug)
                 {
-                    print("speed: " + this.speed);
+                    print("speed: " + this.rb.velocity);
                 }
                 //start decaying
-                tempDirection = -speed.normalized;
+                tempDirection = -this.rb.velocity.normalized;
                 tempAccel = deAcceleration;
             }
             if (this.debug)
@@ -73,28 +77,28 @@ public class PlayerMovement : MonoBehaviour
                 print("tempDirection: " + tempDirection);
             }
 
-            this.AddForce(tempDirection * tempAccel);
+            if (tempDirection.magnitude > 0)
+            {
+                this.AddForce(tempDirection * tempAccel);
+            }
         }
         else
         {
-            this.speed = direction * maxSpeed;
+            this.rb.velocity = direction * maxSpeed;
         }
 
         if (debug)
         {
             print("transform: " + this.transform.position);
-            print("speed: " + this.speed);
+            print("speed: " + this.rb.velocity);
         }
-
-        this.move();
-
-      
+        
     }
 
-    void AddForce(Vector3 acc)
+    void AddForce(Vector2 acc)
     {
         // add the acceleration value
-        var tempSpeed = speed + acc * Time.deltaTime;
+        var tempSpeed = this.rb.velocity + acc * Time.deltaTime;
 
         //make sure we don't fly too fast
         if(tempSpeed.magnitude > maxSpeed)
@@ -107,22 +111,18 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        speed = tempSpeed;
+        this.rb.velocity = tempSpeed;
 
         //update the playback speed of the sound
         {
-            float soundSpeed = 1;
-            if (speed.magnitude > 0) {
-                float additionalSpeed = 2 * speed.magnitude / maxSpeed;
+            float soundSpeed = this.minSoundSpeed;
+            if (this.rb.velocity.magnitude > 0) {
+                float additionalSpeed = (this.maxSoundSpeed - this.minSoundSpeed) * this.rb.velocity.magnitude / maxSpeed;
                 soundSpeed = soundSpeed + additionalSpeed;
             }
-            audio.pitch = soundSpeed;
+            bubbleAudio.pitch = soundSpeed;
         }
-    }
 
-    void move()
-    {
-        this.transform.position += speed * Time.deltaTime;
     }
 
 }

@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     public float maxSoundSpeed = 3;
     public float minSoundSpeed = 1;
 
+    public float audioAccelerateTime = 2;
+
+    float curAcceleratingTime;
+
     public bool debug;
 
     bool breakButton = false;
@@ -39,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        bool isAccelerating = false;
+
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         direction = direction.normalized;
 
@@ -65,16 +71,23 @@ public class PlayerMovement : MonoBehaviour
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
-            if ((breakButton || direction.normalized.magnitude == 0) && this.rb.velocity.magnitude > 0)
+            if ((breakButton || direction.normalized.magnitude == 0))
             {
-                if (debug)
-                {
-                    print("speed: " + this.rb.velocity);
+                if (this.rb.velocity.magnitude > 0) {
+                    if (debug)
+                    {
+                        print("speed: " + this.rb.velocity);
+                    }
+                    //start decaying
+                    tempDirection = -this.rb.velocity.normalized;
+                    tempAccel = deAcceleration;
                 }
-                //start decaying
-                tempDirection = -this.rb.velocity.normalized;
-                tempAccel = deAcceleration;
+            } else
+            {
+                print("accelerating");
+                isAccelerating = true;
             }
+
             if (this.debug)
             {
                 print("tempAccel: " + tempAccel);
@@ -88,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            isAccelerating = direction.magnitude > 0;
             this.rb.velocity = direction * maxSpeed;
         }
 
@@ -96,7 +110,37 @@ public class PlayerMovement : MonoBehaviour
             print("transform: " + this.transform.position);
             print("speed: " + this.rb.velocity);
         }
+
         
+        //update the playback speed of the sound
+        {
+            if (isAccelerating)
+            {
+                this.curAcceleratingTime += Time.deltaTime;
+            }
+            else
+            {
+                this.curAcceleratingTime -= Time.deltaTime;
+            }
+
+            if(this.curAcceleratingTime < 0)
+            {
+                this.curAcceleratingTime = 0;
+            }
+
+            if(this.curAcceleratingTime > this.audioAccelerateTime)
+            {
+                this.curAcceleratingTime = this.audioAccelerateTime;
+            }
+
+            float soundSpeed = this.minSoundSpeed;
+
+            float additionalSpeed = (this.maxSoundSpeed - this.minSoundSpeed) * Mathf.Min(1, this.curAcceleratingTime / this.audioAccelerateTime);
+
+            soundSpeed = soundSpeed + additionalSpeed;
+            bubbleAudio.pitch = soundSpeed;
+        }
+
     }
 
     void AddForce(Vector2 acc)
@@ -116,17 +160,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         this.rb.velocity = tempSpeed;
-
-        //update the playback speed of the sound
-        {
-            float soundSpeed = this.minSoundSpeed;
-            if (this.rb.velocity.magnitude > 0) {
-                float additionalSpeed = (this.maxSoundSpeed - this.minSoundSpeed) * this.rb.velocity.magnitude / maxSpeed;
-                soundSpeed = soundSpeed + additionalSpeed;
-            }
-            bubbleAudio.pitch = soundSpeed;
-        }
-
     }
 
 }

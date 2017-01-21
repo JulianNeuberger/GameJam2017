@@ -40,7 +40,7 @@ public class HealtSystemShip : HealthSystem {
 //        playerAudio.clip = deathClip;
         playerAudio.Play();
         //        anim.SetTrigger("Die");
-        //gameObject.GetComponent<PlayerMovement>().Die();
+        gameObject.GetComponent<PlayerMovement>().Die();
         
     }
 }

@@ -52,12 +52,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(!this.fixedSpeed) {
-            // just so we don't end up with weird behaviour around the zero mark
-            if (this.rb.velocity.magnitude < this.stopSpeed)
-            {
-                this.rb.velocity.Set(0, 0);
-            }
-
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
@@ -104,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         if(tempSpeed.magnitude > maxSpeed)
         {
             tempSpeed.Normalize();
-            tempSpeed.Scale(new Vector3(maxSpeed, maxSpeed, maxSpeed));
+            tempSpeed.Scale(new Vector2(maxSpeed, maxSpeed));
             if (debug)
             {
                 print(tempSpeed);

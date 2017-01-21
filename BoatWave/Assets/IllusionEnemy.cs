@@ -23,14 +23,15 @@ public class IllusionEnemy : MonoBehaviour {
     float timePassed = 0;
     bool fadeOut = false;
 
-    Renderer renderer;
-    Collider2D collider;
+    Renderer spriteRenderer;
+
+    AudioSource audioSource;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
         {
-            collider.enabled = false;
+            audioSource.Play();
             if (debug)
             {
                 print("fading out");
@@ -41,13 +42,14 @@ public class IllusionEnemy : MonoBehaviour {
     }
     
     void Start () {
-        renderer = gameObject.GetComponentInChildren<Renderer>();
-        collider = GetComponent<Collider2D>();
+        spriteRenderer = gameObject.GetComponentInChildren<Renderer>();
 
         player = GameObject.Find("Player");
 
-        colorStart = renderer.material.color;
+        colorStart = spriteRenderer.material.color;
         colorEnd = new Color(colorStart.r, colorStart.g, colorStart.b, 0.0f);
+
+        audioSource = GetComponent<AudioSource>();
     }
 	
 	void Update () {
@@ -56,7 +58,7 @@ public class IllusionEnemy : MonoBehaviour {
             if (timePassed <= fadeOutDuration)
             {
                 timePassed += Time.deltaTime;
-                renderer.material.color = Color.Lerp(colorStart, colorEnd, timePassed / fadeOutDuration);
+                spriteRenderer.material.color = Color.Lerp(colorStart, colorEnd, timePassed / fadeOutDuration);
             } else
             {
                 GameObject.Destroy(this.gameObject);

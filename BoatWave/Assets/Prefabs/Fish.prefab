@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4316229787919728}
   - component: {fileID: 212711107788091460}
   - component: {fileID: 50390660160749120}
+  - component: {fileID: 114304692833806520}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1272204363692054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -40.436234, y: 19.101576, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,6 +62,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &114304692833806520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272204363692054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfba3861e87ff24e8c98bb9fb0a6f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fleeThreshold: 2.5
+  fleeFactor: 3
 --- !u!212 &212711107788091460
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,8 +105,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 21300000, guid: 094a403219a9be54a8a13a64a757c1bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

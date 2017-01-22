@@ -7,6 +7,7 @@ public class TextTyper : MonoBehaviour
 
     public float letterPause = 0.2f;
     public float fadeOutDelay = 2.0f;
+    public float letterPauseFadeOut = 0.1f;
    
 
     string message;
@@ -34,7 +35,7 @@ public class TextTyper : MonoBehaviour
         {
             textComp.text = textComp.text.Substring(1);
             yield return 0;
-            yield return new WaitForSeconds(letterPause);
+            yield return new WaitForSeconds(letterPauseFadeOut);
         }
         textComp.text = "";
     }

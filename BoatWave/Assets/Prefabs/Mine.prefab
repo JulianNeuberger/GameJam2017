@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114268457612421604}
   - component: {fileID: 82734862030485488}
   - component: {fileID: 50683496676686070}
+  - component: {fileID: 114021141668398906}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -41,8 +42,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035829396980880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 15.24, y: 1.39, z: -1}
+  m_LocalScale: {x: 0.23912993, y: 0.23912993, z: 0.23912993}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -161,6 +162,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114021141668398906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1035829396980880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa4e6354762eff4b81e25d9cd97df4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleDamage: 10
 --- !u!114 &114118916561165416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +251,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 499182048
+  randomSeed: 2139548425
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -414,7 +427,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 10
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2877,7 +2890,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2aab91f20835aea45b2e3e593db1e670, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2895,7 +2908,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 326674989a65da04f9db47f7320ae303, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a211f6e420704164ea16c4042c4157cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

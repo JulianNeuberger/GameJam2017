@@ -8,10 +8,15 @@ public class TextTyper : MonoBehaviour
     public float letterPause = 0.2f;
     public float fadeOutDelay = 2.0f;
     public float letterPauseFadeOut = 0.1f;
-   
+
+    public GameObject levelChanger;
 
     string message;
     Text textComp;
+
+    bool finishedWriting = false;
+    int curLetter = 0;
+    float lastLetterTime = -1;
 
     // Use this for initialization
     void Start()
@@ -19,31 +24,51 @@ public class TextTyper : MonoBehaviour
         textComp = GetComponent<Text>();
         message = textComp.text;
         textComp.text = "";
-        StartCoroutine(TypeText());
     }
 
-    IEnumerator TypeText()
+    void Update()
     {
-        foreach (char letter in message.ToCharArray())
+        if (!finishedWriting)
         {
-            textComp.text += letter;
-            yield return 0;
-            yield return new WaitForSeconds(letterPause);
-        }
-        yield return new WaitForSeconds(fadeOutDelay);
-        for(int i = 0; i < message.Length - 1; ++i) 
+            if (Time.time - lastLetterTime > letterPause)
+            {
+                textComp.text += message[curLetter++];
+                lastLetterTime = Time.time;
+
+                if(curLetter == message.Length)
+                {
+                    finishedWriting = true;
+                }
+            }
+        } else
         {
-            textComp.text = textComp.text.Substring(1);
-            yield return 0;
-            yield return new WaitForSeconds(letterPauseFadeOut);
+            if (Time.time - lastLetterTime > letterPause)
+            {
+                if(textComp.text.Length > 0)
+                {
+                    textComp.text = textComp.text.Substring(1);
+                }
+                else if(levelChanger != null)
+                {
+                    LevelChangerBehaviour behaviour = levelChanger.GetComponent<LevelChangerBehaviour>();
+                    if (behaviour != null)
+                    {
+                        behaviour.DoChange();
+                    }
+                    levelChanger = null;
+                }
+                lastLetterTime = Time.time;
+            }
+            //remove text
         }
-        textComp.text = "";
     }
 
     public void writeText(string text)
     {
         message = text;
-        StartCoroutine(TypeText());
+        finishedWriting = false;
+        curLetter = 0;
+        lastLetterTime = -1;
     }
 
 }

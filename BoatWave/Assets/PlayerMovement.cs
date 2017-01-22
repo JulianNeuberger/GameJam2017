@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     AudioSource bubbleAudio;
     bool flipX = false;
 
-    bool uncontrollable = false;
+    public bool uncontrollable = false;
     
     Rigidbody2D rb;
 

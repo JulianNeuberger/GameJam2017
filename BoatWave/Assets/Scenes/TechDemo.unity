@@ -725,6 +725,21 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82914814008537272, guid: cf9a249229791fb49b35fab68aa7eec3,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 099dbe247f1cd4344bee52517d3da6cb, type: 3}
+    - target: {fileID: 82914814008537272, guid: cf9a249229791fb49b35fab68aa7eec3,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.685
+      objectReference: {fileID: 0}
+    - target: {fileID: 82914814008537272, guid: cf9a249229791fb49b35fab68aa7eec3,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf9a249229791fb49b35fab68aa7eec3, type: 2}
   m_IsPrefabParent: 0

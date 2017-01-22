@@ -6,6 +6,7 @@ public class SonarEnemy : MonoBehaviour {
 
     public float moveSpeed = 5;
     public float strayFromCenter = 2;
+    public float maxDistanceToSonar = 200;
 
     protected GameObject player;
     new protected Rigidbody2D rigidbody;
@@ -92,8 +93,13 @@ public class SonarEnemy : MonoBehaviour {
 
     public void OnSonar(float x, float y)
     {
-        lastSonar = new Vector3(x, y);
-        movingToSonar = true;
-        cry.Play();
+        Vector3 sonar = new Vector3(x, y);
+        float distanceToSonar = (sonar - transform.position).magnitude;
+        if(distanceToSonar < maxDistanceToSonar)
+        {
+            lastSonar = sonar;
+            movingToSonar = true;
+            cry.Play();
+        }
     }
 }

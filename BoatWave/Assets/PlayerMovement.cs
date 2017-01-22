@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(!this.uncontrollable && direction.x != 0)
         {
-            Debug.Log(this.uncontrollable);
             flipX = direction.x < 0;
             if(flipX)
             {
@@ -109,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (!this.uncontrollable || !isAccelerating)
             {
-                Debug.Log(this.uncontrollable);
                 this.AddForce(tempDirection * tempAccel);
             }
         }
@@ -191,12 +189,12 @@ public class PlayerMovement : MonoBehaviour
     public void Hide()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Stop();
+        //gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Stop();
     }
 
     public void Show()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
+        //gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
     }
 }

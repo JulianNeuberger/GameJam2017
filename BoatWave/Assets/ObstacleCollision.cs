@@ -22,7 +22,6 @@ public class ObstacleCollision : MonoBehaviour {
 	{
 		if(coll.gameObject.tag == "Player")
 		{
-            Debug.Log("Zusammenstoß");
 			GameObject player = coll.gameObject;
             player.GetComponent<HealthSystemShip>().TakeDamage(obstacleDamage);
 		}

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class HealthSystemShip : HealthSystem {
-    Slider healthSlider;                                 // Reference to the UI's health bar.
-    Animator anim;                                              // Reference to the Animator component.
-    AudioSource playerAudio;                                    // Reference to the AudioSource component.
-    
+
+    public Slider healthSlider;                                 // Reference to the UI's health bar.
+    public Animator anim;                                              // Reference to the Animator component.
+    public AudioSource playerAudio;                                    // Reference to the AudioSource component.
+    public Rigidbody2D debrisPrefab;
+
     void Start () {
         anim = GetComponent<Animator>();
         currentHealth = startingHealth;
@@ -41,12 +43,21 @@ public class HealthSystemShip : HealthSystem {
 
     public override void Death()
     {
-      
         isDead = true;
-//        playerAudio.clip = deathClip;
+        // playerAudio.clip = deathClip;
         playerAudio.Play();
-        //        anim.SetTrigger("Die");
+        // anim.SetTrigger("Die");
         gameObject.GetComponent<PlayerMovement>().Die();
-        
+
+        // spawn debris
+        gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("boot_3_zerstoert");
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+        GameObject explosion = ((GameObject)Instantiate(Resources.Load("Explosion")));
+        explosion.transform.position = new Vector3(
+            gameObject.transform.position.x,
+            gameObject.transform.position.y,
+            gameObject.transform.position.z + .1f);
+        explosion.GetComponent<ParticleSystem>().Play();
+        explosion.GetComponent<AudioSource>().Play();
     }
 }

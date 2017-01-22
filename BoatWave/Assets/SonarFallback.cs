@@ -22,6 +22,7 @@ public class SonarFallback : MonoBehaviour
     protected GameObject SonarEffect;
     protected Color SonarColor;
     protected float IntensityChange;
+    protected List<SonarEnemy> enemies = new List<SonarEnemy>();
 
     // Use this for initialization
     void Start ()
@@ -40,12 +41,28 @@ public class SonarFallback : MonoBehaviour
 		if(!Pinging && Input.GetKeyDown(KeyCode.E))
         {
             Pinging = true;
+            NotifyEnemies();
         }
         if (Pinging)
         {
             UpdateSonar();
         }
 	}
+
+    public void RegisterForSonarEvents(SonarEnemy enemy)
+    {
+        this.enemies.Add(enemy);
+    }
+
+    protected void NotifyEnemies()
+    {
+        float x = this.transform.position.x;
+        float y = this.transform.position.y; 
+        foreach(SonarEnemy e in enemies)
+        {
+            e.OnSonar(x, y);
+        }
+    }
 
     protected void UpdateSonar()
     {

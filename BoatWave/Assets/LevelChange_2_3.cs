@@ -10,7 +10,7 @@ public class LevelChange_2_3 : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene("Level 3");
+            SceneManager.LoadScene("level3");
         }
     }
 

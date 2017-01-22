@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.K))
-        { SceneManager.LoadScene("Level 1"); }
+        { SceneManager.LoadScene("level1"); }
         if (Input.GetKeyDown(KeyCode.U))
-        { SceneManager.LoadScene("Level 2"); }
+        { SceneManager.LoadScene("level2"); }
         if (Input.GetKeyDown(KeyCode.R))
-        { SceneManager.LoadScene("Level 3"); }
+        { SceneManager.LoadScene("level3"); }
     }
 }

@@ -19,10 +19,10 @@ public class holeTrigger : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D coll) 
 	{
+       
 		if(coll.gameObject.tag == "Player")
 		{
-			Debug.Log("Zusammenstoß");
-
+            GameObject.Find("RollenderStein").GetComponent<Animator>().SetTrigger("SteinRollt");
 		}
 	}
 }

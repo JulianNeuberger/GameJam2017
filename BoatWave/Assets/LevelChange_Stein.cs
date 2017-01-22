@@ -9,7 +9,7 @@ public class LevelChange_Stein : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene("Level 2");
+            SceneManager.LoadScene("level2");
         }
     }
 

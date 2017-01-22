@@ -31,7 +31,7 @@ public class TextTyper : MonoBehaviour
             yield return new WaitForSeconds(letterPause);
         }
         yield return new WaitForSeconds(fadeOutDelay);
-        foreach (char letter in message.ToCharArray())
+        for(int i = 0; i < message.Length - 1; ++i) 
         {
             textComp.text = textComp.text.Substring(1);
             yield return 0;

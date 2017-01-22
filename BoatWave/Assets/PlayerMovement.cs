@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(!this.uncontrollable && direction.x != 0)
         {
-            Debug.Log(this.uncontrollable);
             flipX = direction.x < 0;
             if(flipX)
             {
@@ -109,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (!this.uncontrollable || !isAccelerating)
             {
-                Debug.Log(this.uncontrollable);
                 this.AddForce(tempDirection * tempAccel);
             }
         }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4748563347812416}
   - component: {fileID: 212293323519950270}
   - component: {fileID: 114068717539735716}
+  - component: {fileID: 114327571226797412}
   m_Layer: 0
   m_Name: Plant_1
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700176666372720}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.75, y: -0.73, z: 0}
+  m_LocalPosition: {x: -74.31, y: 17.61, z: 0}
   m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,6 +56,17 @@ MonoBehaviour:
   maxAngle: 5
   randomizeAngle: 1
   usesWorldPosition: 1
+--- !u!114 &114327571226797412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1700176666372720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4105da94fd51f074db97674b799e68be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212293323519950270
 SpriteRenderer:
   m_ObjectHideFlags: 1

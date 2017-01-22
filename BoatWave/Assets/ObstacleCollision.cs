@@ -6,8 +6,8 @@ public class ObstacleCollision : MonoBehaviour {
 
     // Use this for initialization
 
-    public float obstacleDamage = 10;
-
+    public float obstacleDamage = 0.1f;
+    
 	void Start () {
 		
 	}
@@ -24,7 +24,7 @@ public class ObstacleCollision : MonoBehaviour {
 		{
             Debug.Log("Zusammenstoß");
 			GameObject player = coll.gameObject;
-            player.GetComponent<HealthSystemShip>().TakeDamage(obstacleDamage);
+            player.GetComponent<HealtSystemShip>().TakeDamage(obstacleDamage);
 		}
         GetComponent<AudioSource>().Play();
 	}

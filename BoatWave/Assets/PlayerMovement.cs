@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     AudioSource bubbleAudio;
     bool flipX = false;
 
-    bool dead = false;
+    bool uncontrollable = false;
     
     Rigidbody2D rb;
 
@@ -53,8 +53,9 @@ public class PlayerMovement : MonoBehaviour
         var direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
         direction = direction.normalized;
 
-        if(!this.dead && direction.x != 0)
+        if(!this.uncontrollable && direction.x != 0)
         {
+            Debug.Log(this.uncontrollable);
             flipX = direction.x < 0;
             if(flipX)
             {
@@ -80,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
             var tempDirection = direction;
             var tempAccel = acceleration;
             //stop our current acceleration
-            if ((this.dead || breakButton || direction.normalized.magnitude == 0))
+            if ((this.uncontrollable || breakButton || direction.normalized.magnitude == 0))
             {
                 if (this.rb.velocity.magnitude > 0) {
                     if (debug)
@@ -106,8 +107,9 @@ public class PlayerMovement : MonoBehaviour
                 print("tempDirection: " + tempDirection);
             }
 
-            if (!this.dead || !isAccelerating)
+            if (!this.uncontrollable || !isAccelerating)
             {
+                Debug.Log(this.uncontrollable);
                 this.AddForce(tempDirection * tempAccel);
             }
         }
@@ -169,11 +171,16 @@ public class PlayerMovement : MonoBehaviour
         this.rb.velocity = tempSpeed;
     }
 
+    public void SetUncontrollable(bool uncontrollable)
+    {
+        this.uncontrollable = uncontrollable;
+    }
+
     public void Die()
     {
         bubbleAudio.enabled = false;
-        this.dead = true;
-        this.displayText("you die!");
+        this.uncontrollable = true;
+        this.displayText("you ded!");
     }
 
     public void displayText(string str)
@@ -181,4 +188,15 @@ public class PlayerMovement : MonoBehaviour
         this.textTyper.writeText(str);
     }
 
+    public void Hide()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Stop();
+    }
+
+    public void Show()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
+    }
 }

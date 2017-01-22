@@ -26,7 +26,6 @@ public class MasterFishBehaviour : MonoBehaviour {
         {
             swarmSize = (int) (swarmSize * Random.Range(.5f, 2));
         }
-        Debug.Log(swarmSize);
         for(int i = 1; i < swarmSize; ++i)
         {
             int index = Random.Range(0, slaveFishPrefabs.Count);

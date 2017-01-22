@@ -189,12 +189,12 @@ public class PlayerMovement : MonoBehaviour
     public void Hide()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Stop();
+        //gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Stop();
     }
 
     public void Show()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
+        //gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
     }
 }

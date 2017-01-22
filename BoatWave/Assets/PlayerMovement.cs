@@ -21,17 +21,21 @@ public class PlayerMovement : MonoBehaviour
 
     bool breakButton = false;
     AudioSource bubbleAudio;
-    ParticleSystem bubbleSystem;
     bool flipX = false;
 
     bool dead = false;
     
     Rigidbody2D rb;
 
+    TextTyper textTyper;
+
     void Start()
     {
         bubbleAudio = GetComponent<AudioSource>();
-        bubbleSystem = gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>();
+
+        var canvas = transform.FindChild("Canvas").GetComponent<Canvas>();
+        var textCanvas = canvas.transform.FindChild("TextCanvas").GetComponent<Canvas>();
+        textTyper = textCanvas.transform.FindChild("Text").GetComponent<TextTyper>();
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -167,9 +171,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-        print("die!");
         bubbleAudio.enabled = false;
         this.dead = true;
+        this.displayText("you die!");
+    }
+
+    public void displayText(string str)
+    {
+        this.textTyper.writeText(str);
     }
 
 }

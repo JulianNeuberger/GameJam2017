@@ -22,12 +22,15 @@ public class TetheredCamera : MonoBehaviour {
 
     void LateUpdate()
     {
-        Vector3 playerPos = player.transform.position;
-        playerPos.z = -10;
-        Vector3 offset = playerPos - this.transform.position;
-        if(offset.magnitude > .001)
+        if(player != null)
         {
-            this.transform.position += offset / this.tetherStrength;
+            Vector3 playerPos = player.transform.position;
+            playerPos.z = -10;
+            Vector3 offset = playerPos - this.transform.position;
+            if (offset.magnitude > .001)
+            {
+                this.transform.position += offset / this.tetherStrength;
+            }
         } 
     }
 }

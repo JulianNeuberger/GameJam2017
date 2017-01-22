@@ -6,8 +6,8 @@ public class ObstacleCollision : MonoBehaviour {
 
     // Use this for initialization
 
-    public float obstacleDamage = 10;
-
+    public float obstacleDamage = 0.1f;
+    
 	void Start () {
 		
 	}

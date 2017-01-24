@@ -14,7 +14,10 @@ public class StoryElemBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        triggered = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            triggered = true;
+        }
     }
 
     // Use this for initialization
@@ -27,13 +30,20 @@ public class StoryElemBehaviour : MonoBehaviour {
     void Update () {
 		if(triggered)
         {
+            PlayerMovement movement = GameObject.Find("Player").GetComponent<PlayerMovement>();
             if (!played)
             {
-                PlayerMovement movement = GameObject.Find("Player").GetComponent<PlayerMovement>();
                 audio.Play();
                 movement.displayText(text.text + "");
-
                 played = true;
+            }
+            else
+            {
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    movement.SkipText();
+                    audio.Stop();
+                }
             }
         }
 	}

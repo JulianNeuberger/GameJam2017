@@ -197,4 +197,9 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         //gameObject.transform.Find("Bubbles").GetComponent<ParticleSystem>().Play();
     }
+
+    public void SkipText()
+    {
+        this.textTyper.SkipText();
+    }
 }

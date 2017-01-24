@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SnakeBehaviour : MonoBehaviour {
 
@@ -19,5 +20,10 @@ public class SnakeBehaviour : MonoBehaviour {
     public void EatPlayer()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().Hide();
+    }
+
+    public void FadeToBlack()
+    {
+        SceneManager.LoadScene("epilogue");
     }
 }

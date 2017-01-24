@@ -63,6 +63,12 @@ public class TextTyper : MonoBehaviour
         }
     }
 
+    public void SkipText()
+    {
+        finishedWriting = true;
+        textComp.text = "";
+    }
+
     public void writeText(string text)
     {
         message = text;

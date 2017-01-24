@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class holeTrigger : MonoBehaviour {
 
@@ -22,7 +23,8 @@ public class holeTrigger : MonoBehaviour {
        
 		if(coll.gameObject.tag == "Player")
 		{
-            GameObject.Find("RollenderStein").GetComponent<Animator>().SetTrigger("SteinRollt");
+            //GameObject.Find("RollenderStein").GetComponent<Animator>().SetTrigger("SteinRollt");
+            SceneManager.LoadScene("level1_2");
 		}
 	}
 }

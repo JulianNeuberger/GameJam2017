@@ -18,6 +18,7 @@ public class LevelChangerBehaviour : MonoBehaviour {
 	}
 
     public void DoChange() {
+        Debug.Log("hallo");
         SceneManager.LoadScene(sceneName);
     }
 }
